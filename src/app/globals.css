@@ -1,0 +1,205 @@
+/* 全局重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 🌟 春天卡通背景（嫩绿网格+柔光） */
+body {
+  background-color: #f5f8fa;
+  /* 春日奶油白 */
+  /* 卡通网格（春日嫩绿细线） */
+  background-image:
+    linear-gradient(rgba(72, 118, 178, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(72, 118, 178, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+  /* 卡通圆润网格尺寸 */
+  color: #2d3748;
+  /* 春日森系绿 */
+  font-family: 'Comic Sans MS', 'Marker Felt', '微软雅黑', sans-serif;
+  /* 卡通字体 */
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 春日柔光效果 */
+  background-blend-mode: soft-light;
+}
+
+/* 🌟 卡通光标（春日花瓣+小圆点） */
+.cursor-dot {
+  width: 12px;
+  height: 12px;
+  background-color: #4876b2;
+  /* 春日蜜桃粉 */
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 50;
+  transition: transform 0.1s ease;
+}
+
+.cursor-square {
+  width: 36px;
+  height: 36px;
+  border: 2px solid #f59e0b;
+  /* 春日天空蓝 */
+  border-radius: 12px;
+  /* 圆角方块（卡通） */
+  position: fixed;
+  pointer-events: none;
+  z-index: 50;
+  /* 卡通旋转+缩放 */
+  transition: all 0.2s ease;
+  transform: rotate(10deg);
+  /* 轻微倾斜更卡通 */
+}
+
+/* 光标hover导航时变形（花瓣旋转） */
+.nav-item:hover~.cursor-square {
+  transform: rotate(0deg) scale(1.2);
+  border-color: #4876b2;
+}
+
+/* 主容器 */
+.main-container {
+  width: 100%;
+  max-width: 1600px;
+  padding: 0 24px;
+  padding-top: 120px;
+  padding-bottom: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 🌟 卡通顶部小方块（春日渐变+弹跳动画） */
+.top-square {
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(45deg, #4876b2, #2af3d8);
+  /* 春日蓝粉渐变 */
+  border-radius: 8px;
+  /* 圆角方块 */
+  margin-bottom: 24px;
+  /* 卡通弹跳（春日活力） */
+  animation: bounce 2s infinite;
+}
+
+.avatar-wrapper {
+  width: 100px;
+  height: 100px;
+  border-radius: 15px;
+  overflow: hidden;
+  /* 春日花环边框（渐变+虚线更卡通） */
+  border: 2px dashed;
+  border-image: linear-gradient(135deg, #2af3d8, #6fa8f3, #4876b2) 1;
+  margin-bottom: 16px;
+  /* 卡通hover旋转+放大 */
+  transition: transform 0.5s ease;
+  box-shadow: 0 4px 12px rgba(148, 226, 159, 0.3);
+}
+
+.avatar-wrapper:hover {
+  transform: rotate(15deg) scale(1.05);
+  /* 俏皮旋转 */
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 春日柔光滤镜 */
+  filter: brightness(1.1) contrast(0.95) saturate(1.1);
+}
+
+/* 🌟 卡通用户名（春日渐变文字+泡泡阴影） */
+.username {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+  /* 春日渐变文字（粉绿蓝） */
+  background: linear-gradient(90deg, #2af3d8, #6fa8f3, #4876b2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* 卡通泡泡阴影 */
+  text-shadow: 0 2px 4px rgba(72, 118, 178, 0.15);
+}
+
+/* 卡通副标题 */
+.subtitle {
+  font-size: 14px;
+  color: #f343d6;
+  /* 春日嫩芽绿 */
+  margin-bottom: 48px;
+  letter-spacing: 0.1em;
+  /* 卡通轻微模糊 */
+  filter: blur(0.2px);
+  padding-right: 50px;
+}
+
+/* 导航网格 */
+.nav-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 36px;
+}
+
+/* 弹跳（顶部方块） */
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* 响应式适配（手机端卡通缩放） */
+@media (max-width: 768px) {
+  .nav-grid {
+    gap: 20px;
+  }
+
+  .username {
+    font-size: 28px;
+  }
+
+  .nav-item {
+    transform: scale(0.9);
+    padding: 8px 10px;
+  }
+
+  .nav-item:hover {
+    transform: translateY(-3px) scale(1);
+  }
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #4a5568;
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(72, 118, 178, 0.15);
+}
+
+.nav-item:hover {
+  color: #fff;
+  transform: translateY(-5px) scale(1.05);
+  background: linear-gradient(135deg, #ddeb91 0%, #86a6ec 50%, #bde0fe 100%);
+  box-shadow: 0 8px 16px rgba(72, 118, 178, 0.25);
+}
