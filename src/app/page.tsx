@@ -1,25 +1,33 @@
+'use client';
+import Link from 'next/link';
 import React from 'react';
-import { Button, Card, Flex, Typography } from 'antd';
+import { Button } from 'antd';
 
 export default function Home() {
   return (
-    <div className="relative z-10 h-screen w-screen flex flex-col items-center justify-center p-4">
+    <div className="contain">
 
       <div className="box-group-left">
         <div className="box box1">
-          内容超多超多超多超多超多超多超多超多超多超多超多超多超多超多超多
+
         </div>
         <div className="box box2">
-          内容超多超多超多超多超多超多超多超多超多超多超多
+          <Link href="/blog" target="_blank">
+            <Button >Blog</Button>
+          </Link>
+
+          <Link href="/admin" target="_blank">
+            <Button >管理后台</Button>
+          </Link>
         </div>
       </div>
 
       <div className="box-group-right">
         <div className="box box3">
-          内容超多超多超多超多超多超多超多超多超多超多超多超多超多超多超多
+
         </div>
         <div className="box box4">
-          内容超多超多超多超多超多超多超多超多超多超多超多
+
         </div>
       </div>
 

@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
 import { ReactNode } from "react";
-import "./globals.css";
+import "@/styles/globals.css";
 
 export const metadata: Metadata = {
-  title: "Hi, I'm Luka.",
-  viewport: "width=device-width, initial-scale=1.0"
+  title: "Luka's Home"
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({
@@ -17,10 +23,7 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body className="min-h-screen relative">
-
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-xl"></div>
-
+      <body>
         {children}
       </body>
     </html>
