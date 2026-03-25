@@ -1,3 +1,38 @@
+// 面包屑
+export interface Breadcrumb {
+    name: string;
+    path: string;
+}
+
+// admin分页列表请求
+export interface BlogPageReq {
+  pageNum: number;
+  pageSize: number;
+  title: string;
+  category: string;
+}
+
+// admin 分页列表数据
+export interface BlogPageData {
+  id: number;
+  title: string;
+  coverUrl: string;
+  category: string;
+  status: number;
+  views: number;
+  isFeatured: number;
+  isIndex: number;
+  createTime: Date;
+}
+
+// admin分页列表返回值
+export interface BlogPageResp {
+  total: number;
+  pages: number;
+  list: BlogPageData[];
+}
+
+
 // ===== 文章 =====
 export interface Post {
   id: number;
@@ -6,7 +41,7 @@ export interface Post {
   cover: string;
   category: string;
   tags: string[];
-  status: 'published' | 'draft' | 'scheduled';
+  status: number;
   date: string;
   readTime: string;
   views: number;

@@ -1,8 +1,7 @@
 'use client';
 
-import React from 'react';
 import { useRouter } from 'next/navigation';
-import AdminLayout from '@/components/admin/layout/AdminLayout';
+
 import StatsCard from '@/components/admin/dashboard/StatsCard';
 import RecentPosts from '@/components/admin/dashboard/RecentPosts';
 import QuickActions from '@/components/admin/dashboard/QuickActions';
@@ -15,11 +14,11 @@ import { Button } from 'antd';
 export default function DashboardPage() {
   const router = useRouter();
   return (
-    <AdminLayout breadcrumbs={['仪表盘']}>
+    <div>
       <div className="page-title-row">
         <div>
           <h1>仪表盘</h1>
-          <div className="subtitle">欢迎回来，Lulu 👋</div>
+          <div className="subtitle">欢迎回来，Luka 👋</div>
         </div>
         <Button className="btn-primary" onClick={()=> router.push('/admin/blog/new')}>
           ✏️ 写文章
@@ -39,6 +38,6 @@ export default function DashboardPage() {
           <ActivityTimeline />
         </div>
       </div>
-    </AdminLayout>
+    </div>
   );
 }

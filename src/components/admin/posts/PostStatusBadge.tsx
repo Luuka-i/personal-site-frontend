@@ -1,18 +1,21 @@
 import React from 'react';
-import type { Post } from '@/types/admin';
+import { BlogPageData } from '@/types/admin';
 
 interface PostStatusBadgeProps {
-  status: Post['status'];
+  status: BlogPageData['status'];
 }
 
-const statusConfig: Record<Post['status'], { label: string; className: string }> = {
-  published: { label: '已发布', className: 'status-published' },
-  draft: { label: '草稿', className: 'status-draft' },
-  scheduled: { label: '定时发布', className: 'status-scheduled' },
+const statusConfig: Record<BlogPageData['status'], { label: string; className: string }> = {
+  2: { label: '已发布', className: 'status-published' },
+  0: { label: '草稿', className: 'status-draft' },
+  1: { label: '定未布', className: 'status-scheduled' },
 };
 
 const PostStatusBadge: React.FC<PostStatusBadgeProps> = ({ status }) => {
+  status = status?status:0;
+  console.log("status", status);
   const config = statusConfig[status];
+  console.log("config", config);
   return (
     <span className={`status-badge ${config.className}`}>
       ● {config.label}

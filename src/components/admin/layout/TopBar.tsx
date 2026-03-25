@@ -2,11 +2,14 @@
 
 import React from 'react';
 
+import { Breadcrumb } from '@/types/admin';
+
 interface TopBarProps {
-  breadcrumbs: string[];
+  breadcrumbs: Breadcrumb[];
 }
 
-const TopBar: React.FC<TopBarProps> = ({ breadcrumbs }) => {
+
+const TopBar: React.FC<TopBarProps> = ({breadcrumbs}) => {
   return (
     <div className="admin-topbar">
       <div className="breadcrumb">
@@ -14,9 +17,9 @@ const TopBar: React.FC<TopBarProps> = ({ breadcrumbs }) => {
           <span key={index}>
             {index > 0 && <span className="separator">/</span>}
             {index === breadcrumbs.length - 1 ? (
-              <span className="current">{item}</span>
+              <span className="current">{item.name}</span>
             ) : (
-              <span>{item}</span>
+              <span>{item.name}</span>
             )}
           </span>
         ))}

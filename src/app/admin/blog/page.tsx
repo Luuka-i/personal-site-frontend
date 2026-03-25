@@ -1,31 +1,52 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
-import AdminLayout from '@/components/admin/layout/AdminLayout';
 import PostToolbar from '@/components/admin/posts/PostToolbar';
 import PostTable from '@/components/admin/posts/PostTable';
 import { posts } from '@/data/admin-data';
+import { adminPage } from '@/api/admin';
+import { BlogPageResp, BlogPageReq } from '@/types/admin';
 
 export default function PostsPage() {
+  const [blogPageResp, setPageData] = useState<any>();
+
+    // 2. 请求接口
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const blogPageReq = {'pageNum':1, 'pageSize':10, 'title': '', 'category': ''};
+        const data = await adminPage(blogPageReq);
+        console.log("=======");
+        console.log(data);
+        setPageData(data);
+      } catch (err) {
+        console.log('请求失败', err);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
   const [search, setSearch] = useState('');
-  const [statusFilter, setStatusFilter] = useState('all');
-  const [categoryFilter, setCategoryFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState();
+  const [categoryFilter, setCategoryFilter] = useState();
 
   const filteredPosts = useMemo(() => {
     return posts.filter((post) => {
       const matchSearch =
         !search || post.title.toLowerCase().includes(search.toLowerCase());
       const matchStatus =
-        statusFilter === 'all' || post.status === statusFilter;
+        statusFilter === 0 || post.status === statusFilter;
       const matchCategory =
-        categoryFilter === 'all' || post.category === categoryFilter;
+        categoryFilter === 0 || post.category === categoryFilter;
       return matchSearch && matchStatus && matchCategory;
     });
   }, [search, statusFilter, categoryFilter]);
 
   return (
-    <AdminLayout breadcrumbs={['内容管理', '文章管理']}>
+    <div>
       <div className="page-title-row">
         <div>
           <h1>文章管理</h1>
@@ -45,7 +66,7 @@ export default function PostsPage() {
         onCategoryFilterChange={setCategoryFilter}
       />
 
-      <PostTable posts={filteredPosts} />
-    </AdminLayout>
+      <PostTable blogPageResp={blogPageResp} />
+    </div>
   );
 }

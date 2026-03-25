@@ -1,22 +1,32 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import type { Post } from '@/types/admin';
 import PostStatusBadge from './PostStatusBadge';
+import { BlogPageResp, BlogPageData } from '@/types/admin';
 
-interface PostTableProps {
-  posts: Post[];
+
+interface BologTableProps {
+  blogPageResp: BlogPageResp;
 }
 
-const PostTable: React.FC<PostTableProps> = ({ posts }) => {
+const PostTable: React.FC<BologTableProps> = ({ blogPageResp }) => {
+  console.log("--------");
+  console.log(blogPageResp);
+  const [blogPageData, setBlogPageData] = useState<BlogPageData[]>([]);
+
+  useEffect(() => {
+    setBlogPageData(blogPageResp?.list ?? []);
+  }, [blogPageResp]);
+  
+
   const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
 
   const toggleAll = () => {
-    if (selectedIds.size === posts.length) {
+    if (selectedIds.size === blogPageData.length) {
       setSelectedIds(new Set());
     } else {
-      setSelectedIds(new Set(posts.map((p) => p.id)));
+      setSelectedIds(new Set(blogPageData.map((p) => p.id)));
     }
   };
 
@@ -38,7 +48,7 @@ const PostTable: React.FC<PostTableProps> = ({ posts }) => {
             <th style={{ width: 40 }}>
               <input
                 type="checkbox"
-                checked={selectedIds.size === posts.length && posts.length > 0}
+                checked={selectedIds.size === blogPageData.length && blogPageData.length > 0}
                 onChange={toggleAll}
                 style={{ accentColor: '#667eea' }}
               />
@@ -52,7 +62,7 @@ const PostTable: React.FC<PostTableProps> = ({ posts }) => {
           </tr>
         </thead>
         <tbody>
-          {posts.map((post) => (
+          {blogPageData.map((post) => (
             <tr key={post.id}>
               <td>
                 <input
@@ -65,7 +75,7 @@ const PostTable: React.FC<PostTableProps> = ({ posts }) => {
               <td>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                   <div
-                    className={`post-thumb-sm ${post.cover}`}
+                    className={`post-thumb-sm ${post.coverUrl}`}
                     style={{
                       width: 48,
                       height: 32,
@@ -95,7 +105,7 @@ const PostTable: React.FC<PostTableProps> = ({ posts }) => {
               <td style={{ color: '#999' }}>
                 {post.views > 0 ? post.views.toLocaleString() : '-'}
               </td>
-              <td style={{ color: '#999', fontSize: 13 }}>{post.date}</td>
+              <td style={{ color: '#999', fontSize: 13 }}>123</td>
               <td>
                 <Link href={`/posts/${post.id}`} className="action-link">
                   编辑

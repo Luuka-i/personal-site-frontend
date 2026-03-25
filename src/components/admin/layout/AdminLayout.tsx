@@ -1,12 +1,13 @@
 'use client';
 
 import React from 'react';
-import Sidebar from './Sidebar';
-import TopBar from './TopBar';
+import { Breadcrumb } from '@/types/admin';
+import Sidebar from '@/components/admin/layout/Sidebar';
+import TopBar from '@/components/admin/layout/TopBar';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
-  breadcrumbs: string[];
+  breadcrumbs: Breadcrumb[];
 }
 
 const AdminLayout: React.FC<AdminLayoutProps> = ({ children, breadcrumbs }) => {
